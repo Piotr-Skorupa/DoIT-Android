@@ -18,7 +18,7 @@ public class ShareComponent
             Log.i(TAG, "START");
             Log.i(TAG, path);
             intentShareFile.setType("text/txt");
-            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(path));
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + path));
             intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Lista Zadań");
             intentShareFile.putExtra(Intent.EXTRA_TEXT, "Udostępniam Ci listę zadań. Pobierz ją z załącznika i otwórz w aplikacji.");
             context.startActivity(Intent.createChooser(intentShareFile, "Share File"));

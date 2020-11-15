@@ -4,7 +4,6 @@
 
 ToDoModel::ToDoModel(QObject *parent)
     : QAbstractListModel(parent)
-    , items{Task("Przykładowe zadanie", false)}
 {
 }
 
@@ -133,6 +132,7 @@ std::string ToDoModel::listToString() const
     std::string result{};
 
     result += "LISTA ZADAŃ:\n";
+    result += currentList.toStdString() + "\n";
 
     int number{1};
     for (const auto & task : items)
@@ -151,6 +151,9 @@ void ToDoModel::updateFromStringList(QList<QString>& listString)
         qDebug() << "Can not load from file. Bad file format.";
         return;
     }
+
+    listString.pop_front();
+    currentList = listString.front();
     listString.pop_front();
 
     beginResetModel();

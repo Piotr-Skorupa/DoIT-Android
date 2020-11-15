@@ -131,6 +131,46 @@ Dialog {
                     }
                 }
             }
+
+            Rectangle {
+                id: pinkBox
+                property color baseColor: "pink"
+                width: 50
+                height: 50
+                color: baseColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        restoreColors()
+                        parent.color = "#ffffff"
+                        choosedColor = "pink"
+                        choosed = true
+                    }
+                }
+            }
+
+            Rectangle {
+                id: lightGreenBox
+                property color baseColor: "#b2ff59"
+                width: 50
+                height: 50
+                color: baseColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        restoreColors()
+                        parent.color = "#ffffff"
+                        choosedColor = "#b2ff59"
+                        choosed = true
+                    }
+                }
+            }
         }
     }
 
@@ -142,5 +182,7 @@ Dialog {
         greenBox.color = greenBox.baseColor
         lightBlueBox.color = lightBlueBox.baseColor
         darkBlueBox.color = darkBlueBox.baseColor
+        pinkBox.color = pinkBox.baseColor
+        lightGreenBox.color = lightGreenBox.baseColor
     }
 }

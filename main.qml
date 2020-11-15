@@ -8,53 +8,21 @@ Rectangle {
 
     FileDialog
     {
-        id: savefileDialog
-        title: "lista_zadan.txt"
-        folder: shortcuts.home
-        selectExisting: false
-        nameFilters: ["Text files (*.txt)"]
-        onAccepted: {
-            var path = savefileDialog.fileUrl.toString();
-            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
-            // unescape html codes like '%23' for '#'
-            var cleanPath = decodeURIComponent(path);
-            ToDoListViewModelContext.saveToFile(cleanPath)
-        }
-        onRejected: {
-        }
-    }
-
-    FileDialog
-    {
         id: loadfileDialog
         title: "Z jakiego pliku wczytać listę?"
         folder: shortcuts.home
         nameFilters: ["Text files (*.txt)"]
         onAccepted: {
             var path = loadfileDialog.fileUrl.toString();
+
             path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
             // unescape html codes like '%23' for '#'
             var cleanPath = decodeURIComponent(path);
             ToDoListViewModelContext.loadFromFile(cleanPath)
+            loadfileDialog.close()
         }
         onRejected: {
-        }
-    }
-
-    FileDialog
-    {
-        id: sharefileDialog
-        title: "Z jakiego pliku wczytać listę?"
-        folder: shortcuts.home
-        nameFilters: ["Text files (*.txt)"]
-        onAccepted: {
-            var path = sharefileDialog.fileUrl.toString();
-            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
-            // unescape html codes like '%23' for '#'
-            var cleanPath = decodeURIComponent(path);
-            ToDoListViewModelContext.send(cleanPath)
-        }
-        onRejected: {
+            loadfileDialog.close()
         }
     }
 
@@ -65,7 +33,7 @@ Rectangle {
         Button
         {
             text: "ZAPISZ"
-            onClicked: savefileDialog.open()
+            onClicked: ToDoListViewModelContext.saveToFile("")
         }
         Button
         {
@@ -75,14 +43,45 @@ Rectangle {
         Button
         {
             text: "UDOSTĘPNIJ"
-            onClicked: sharefileDialog.open()
+            onClicked: ToDoListViewModelContext.send("")
+        }
+    }
+
+    Row
+    {
+        id: listNameRow
+        x: 10
+        y: menuButtons.height + 10
+        spacing: 20
+        TextInput
+        {
+            id: listName
+            font.pointSize: 30
+            text: ToDoListViewModelContext.currentList
+            width: contentWidth + 10
+
+            Connections
+            {
+                target: ToDoListViewModelContext
+                function onCurrentListChange(newName)
+                {
+                    console.log("Catched change name signal")
+                    listName.text = newName
+                }
+            }
+        }
+
+        Button
+        {
+            text: "ZMIEŃ"
+            onClicked: ToDoListViewModelContext.changeListName(listName.text)
         }
     }
 
     ToDoList
     {
         id: toDoList
-        y: menuButtons.height + 20
+        y: listNameRow.y + listNameRow.height + 10
     }
 
     Button
@@ -92,4 +91,5 @@ Rectangle {
         onClicked: ToDoListViewModelContext.addElement()
     }
 }
+
 

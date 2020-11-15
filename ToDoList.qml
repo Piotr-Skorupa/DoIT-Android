@@ -87,6 +87,7 @@ Frame
                 Layout.fillHeight: true
                 Layout.maximumWidth: 1000
                 selectByMouse: true
+                activeFocusOnPress : true
                 text: model.description
                 onEditingFinished: ToDoListViewModelContext.updateTask(uuid, text, doneCheck.checked, model.color)
             }

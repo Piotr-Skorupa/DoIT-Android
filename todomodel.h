@@ -73,9 +73,10 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
+public:
+    QString currentList;
 private:
     QList<Task> items;
-
     void printItems();
 };
 
