@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>ToDoList.qml</file>
         <file>ColorChooseDialog.qml</file>
+        <file>SimpleDialog.qml</file>
     </qresource>
 </RCC>

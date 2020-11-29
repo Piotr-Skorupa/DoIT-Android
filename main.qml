@@ -26,6 +26,24 @@ Rectangle {
         }
     }
 
+    SimpleDialog
+    {
+        id: saveOkDialog
+        width: toDoList.width - 100
+        anchors.centerIn: parent
+
+        information: "Plik został zapisany."
+
+        Button
+        {
+            anchors.bottom: parent.bottom
+            text: "Ok"
+            onClicked: {
+                saveOkDialog.close()
+            }
+        }
+    }
+
     Row
     {
         id: menuButtons
@@ -33,7 +51,11 @@ Rectangle {
         Button
         {
             text: "ZAPISZ"
-            onClicked: ToDoListViewModelContext.saveToFile("")
+            onClicked:
+            {
+                ToDoListViewModelContext.saveToFile("")
+                saveOkDialog.open()
+            }
         }
         Button
         {
