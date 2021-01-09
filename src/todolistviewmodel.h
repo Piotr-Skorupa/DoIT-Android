@@ -22,12 +22,14 @@ public:
     Q_INVOKABLE void loadFromFile(const QString& path);
     Q_INVOKABLE void send(const QString& path);
     Q_INVOKABLE void changeListName(const QString& newName);
+    Q_INVOKABLE void sort();
 
     ToDoModel * getModel();
     QString getCurrentList() const;
 
 signals:
     void currentListChange(const QString& newName);
+    void loadingFileError();
 public slots:
 
 private:

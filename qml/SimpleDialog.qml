@@ -6,7 +6,11 @@ Dialog {
 
     property string information: ""
 
+    background: Rectangle {
+        color: "#fcfbe3"
+    }
     contentItem: Rectangle {
+        color: "#fcfbe3"
         implicitHeight: 150
         width: parent.width - 100
 

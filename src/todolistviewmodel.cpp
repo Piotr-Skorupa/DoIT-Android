@@ -119,15 +119,8 @@ void ToDoListViewModel::loadFromFile(const QString& path)
         if (index != std::string::npos)
         {
             pathStd.erase(0, index + rawPattern.length());
-            currentListFile = QString::fromStdString(pathStd);
         }
     }
-    else
-    {
-        currentListFile = path;
-    }
-
-    qDebug() << "New current file path: " << currentListFile;
 
     QTextStream in(&file);
     QList<QString> listString;
@@ -139,9 +132,18 @@ void ToDoListViewModel::loadFromFile(const QString& path)
     }
     file.close();
 
-    model.updateFromStringList(listString);
+    const bool updated = model.updateFromStringList(listString);
+    if (updated)
+    {
+        currentListFile = DOWNLOAD_DIR + SEP + model.currentList + FILE_TYPE;
+        qDebug() << "New current file path: " << currentListFile;
 
-    emit currentListChange(model.currentList);
+        emit currentListChange(model.currentList);
+    }
+    else
+    {
+        emit loadingFileError();
+    }
 }
 
 void ToDoListViewModel::send(const QString& path)
@@ -162,6 +164,11 @@ void ToDoListViewModel::send(const QString& path)
         "(Landroid/content/Context;Ljava/lang/String;)V",
         QtAndroid::androidContext().object(),
         javaShareFile.object<jstring>());
+}
+
+void ToDoListViewModel::sort()
+{
+    model.sortList();
 }
 
 void ToDoListViewModel::getRealPathFromAndroidURI(const QString& path)

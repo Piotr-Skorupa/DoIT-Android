@@ -6,6 +6,8 @@ import QtQuick.Dialogs 1.3
 
 Rectangle {
 
+    color: "#fcfbe3"
+
     FileDialog
     {
         id: loadfileDialog
@@ -36,10 +38,38 @@ Rectangle {
 
         Button
         {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
             anchors.bottom: parent.bottom
             text: "Ok"
             onClicked: {
                 saveOkDialog.close()
+            }
+        }
+    }
+
+    SimpleDialog
+    {
+        id: badFileDialog
+        width: toDoList.width - 100
+        anchors.centerIn: parent
+
+        information: "Nie można wczytać pliku. Zły format!"
+
+        Button
+        {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
+            anchors.bottom: parent.bottom
+            text: "Ok"
+            onClicked: {
+                badFileDialog.close()
             }
         }
     }
@@ -50,6 +80,11 @@ Rectangle {
         spacing: 5
         Button
         {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
             text: "ZAPISZ"
             onClicked:
             {
@@ -59,11 +94,21 @@ Rectangle {
         }
         Button
         {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
             text: "WCZYTAJ"
             onClicked: loadfileDialog.open()
         }
         Button
         {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
             text: "UDOSTĘPNIJ"
             onClicked: ToDoListViewModelContext.send("")
         }
@@ -90,11 +135,22 @@ Rectangle {
                     console.log("Catched change name signal")
                     listName.text = newName
                 }
+
+                function onLoadingFileError()
+                {
+                    console.log("Catched loading file error signal")
+                    badFileDialog.open()
+                }
             }
         }
 
         Button
         {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#ececec"
+            }
             text: "ZMIEŃ"
             onClicked: ToDoListViewModelContext.changeListName(listName.text)
         }
@@ -108,9 +164,29 @@ Rectangle {
 
     Button
     {
+        background: Rectangle
+        {
+            radius: 10
+            color: "#ececec"
+        }
+        id: addButton
         y: toDoList.y + toDoList.height + 20
         text: "DODAJ"
         onClicked: ToDoListViewModelContext.addElement()
+    }
+
+    Button
+    {
+        background: Rectangle
+        {
+            radius: 10
+            color: "#ececec"
+        }
+        id: sortButton
+        x: addButton.x + addButton.width + 20
+        y: toDoList.y + toDoList.height + 20
+        text: "UPORZĄDKUJ"
+        onClicked: ToDoListViewModelContext.sort()
     }
 }
 

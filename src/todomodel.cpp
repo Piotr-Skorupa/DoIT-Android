@@ -144,12 +144,12 @@ std::string ToDoModel::listToString() const
     return result;
 }
 
-void ToDoModel::updateFromStringList(QList<QString>& listString)
+bool ToDoModel::updateFromStringList(QList<QString>& listString)
 {
     if (listString.front() != "LISTA ZADAŃ:")
     {
-        qDebug() << "Can not load from file. Bad file format.";
-        return;
+        qWarning() << "Can not load from file. Bad file format.";
+        return false;
     }
 
     listString.pop_front();
@@ -208,5 +208,15 @@ void ToDoModel::updateFromStringList(QList<QString>& listString)
             }
         }
     }
+    endResetModel();
+
+    return true;
+}
+
+void ToDoModel::sortList()
+{
+    qDebug() << "SORTING !!!";
+    beginResetModel();
+    std::sort(items.begin(), items.end());
     endResetModel();
 }

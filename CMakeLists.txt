@@ -29,17 +29,17 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick AndroidExtras REQUIRED)
 
 if(ANDROID)
     add_library(TODO_ANDROID SHARED
-      main.cpp
-      qml.qrc
-      todomodel.cpp
-      todolistviewmodel.cpp
+      src/main.cpp
+      qml/qml.qrc
+      src/todomodel.cpp
+      src/todolistviewmodel.cpp
     )
 else()
     add_executable(TODO_ANDROID
-      main.cpp
-      qml.qrc
-      todomodel.cpp
-      todolistviewmodel.cpp
+      src/main.cpp
+      qml/qml.qrc
+      src/todomodel.cpp
+      src/todolistviewmodel.cpp
     )
 endif()
 

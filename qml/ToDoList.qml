@@ -9,6 +9,10 @@ Frame
 {
     id: frame
     width: parent.width
+    background: Rectangle
+    {
+        color: "#c1b4a2"
+    }
 
     property string globalClickedUuid: ""
 
@@ -24,6 +28,11 @@ Frame
             anchors.bottom: parent.bottom
             Button
             {
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#ececec"
+                }
                 text: "Ok"
                 onClicked: {
                     if (colorDialog.choosed === true)
@@ -37,6 +46,11 @@ Frame
             }
             Button
             {
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#ececec"
+                }
                 text: "Cancel"
                 onClicked: {
                     colorDialog.choosed = false
@@ -49,7 +63,7 @@ Frame
 
     ListView
     {
-        implicitHeight: 400
+        implicitHeight: 450
         width: parent.width
         spacing: 5
 
@@ -70,6 +84,7 @@ Frame
                 Layout.fillHeight: true
                 background: Rectangle
                 {
+                    radius: width
                     color: model.color
                 }
 
@@ -83,12 +98,20 @@ Frame
             TextField
             {
                 id: editText
+                Layout.minimumWidth: frame.width - doneCheck.width - colorButton.width - removeButton.width - (4 * 20)
+                Layout.maximumWidth: frame.width - doneCheck.width - colorButton.width - removeButton.width - (4 * 20)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: 1000
                 selectByMouse: true
                 activeFocusOnPress : true
                 text: model.description
+                background: Rectangle
+                {
+                    radius: 10
+                    width: parent.width
+                    color: "#fcfbe3"
+                }
+
                 onEditingFinished: ToDoListViewModelContext.updateTask(uuid, text, doneCheck.checked, model.color)
             }
             CheckBox
@@ -107,6 +130,11 @@ Frame
                 Layout.preferredWidth: 40
                 Layout.maximumWidth: 50
                 onClicked: ToDoListViewModelContext.removeElement(uuid)
+                background: Rectangle
+                {
+                    color: "#ececec"
+                    radius: 10
+                }
             }
         }
     }

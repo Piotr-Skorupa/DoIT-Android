@@ -4,42 +4,7 @@
 #include <QAbstractListModel>
 #include <QList>
 #include <QDebug>
-#include <QUuid>
-#include <QColor>
-
-constexpr auto TASK_DEFAULT_COLOR = "#0000ff";
-
-struct Task
-{
-
-    Task(const QString& description, bool done)
-        : uuid(QUuid::createUuid()), description(description), done(done), color(TASK_DEFAULT_COLOR)
-    {
-    }
-
-    Task(const QString& description, bool done, QString colorName)
-        : uuid(QUuid::createUuid()), description(description), done(done), color(colorName)
-    {
-    }
-
-    Task(const QString& uuid, const QString& description, bool done)
-        : uuid(uuid), description(description), done(done), color(TASK_DEFAULT_COLOR)
-    {
-    }
-
-
-    QUuid uuid;
-    QString description;
-    bool done;
-    QColor color;
-
-    friend bool operator==(const Task& lhs, const Task& rhs);
-};
-
-inline bool operator==(const Task& lhs, const Task& rhs)
-{
-    return lhs.uuid == rhs.uuid;
-}
+#include "task.h"
 
 class ToDoModel : public QAbstractListModel
 {
@@ -64,7 +29,8 @@ public:
     void updateTaskColor(const QString& uuid, QColor color);
     void removeTask(const QString& uuid);
     std::string listToString() const;
-    void updateFromStringList(QList<QString>& listString);
+    bool updateFromStringList(QList<QString>& listString);
+    void sortList();
 
     bool setData(const QModelIndex &index, const QVariant &value,
                  int role = Qt::EditRole) override;

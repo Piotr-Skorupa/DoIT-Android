@@ -7,9 +7,13 @@ Dialog {
     property color choosedColor: "#0000ff"
     property bool choosed: false
 
+    background: Rectangle {
+        color: "#fcfbe3"
+    }
     contentItem: Rectangle {
         implicitHeight: 150
         width: parent.width - 100
+        color: "#fcfbe3"
 
         Grid {
             Rectangle {
