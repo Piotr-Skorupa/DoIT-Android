@@ -52,6 +52,39 @@ void ToDoListViewModel::addElement()
     model.add("", false);
 }
 
+void ToDoListViewModel::addFromText(const QString& text)
+{
+    if (text.isEmpty())
+    {
+        return;
+    }
+
+    auto textStd = text.toStdString();
+
+    while (not textStd.empty())
+    {
+        auto coma = textStd.find(',');
+        if (coma != std::string::npos)
+        {
+            auto description = textStd.substr(0, coma);
+            model.add(QString::fromStdString(description), false);
+            if (textStd[coma + 1] == ' ')
+            {
+                textStd.erase(0, coma + 2);
+            }
+            else
+            {
+                textStd.erase(0, coma + 1);
+            }
+        }
+        else
+        {
+            model.add(QString::fromStdString(textStd), false);
+            textStd.clear();
+        }
+    }
+}
+
 void ToDoListViewModel::updateTask(const QString& uuid, const QString& description, bool done, QColor color)
 {
     model.updateTask(uuid, description, done, color);

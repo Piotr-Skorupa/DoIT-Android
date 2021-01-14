@@ -4,5 +4,6 @@
         <file>ToDoList.qml</file>
         <file>ColorChooseDialog.qml</file>
         <file>SimpleDialog.qml</file>
+        <file>AddFromTextDialog.qml</file>
     </qresource>
 </RCC>

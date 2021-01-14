@@ -15,15 +15,23 @@ Rectangle {
         folder: shortcuts.home
         nameFilters: ["Text files (*.txt)"]
         onAccepted: {
-            var path = loadfileDialog.fileUrl.toString();
+            var path = loadfileDialog.fileUrl.toString()
 
-            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
+            if (path === "")
+            {
+                var len = loadfileDialog.fileUrls.length
+                path = loadfileDialog.fileUrls[len - 1].toString()
+            }
+
+            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"")
             // unescape html codes like '%23' for '#'
-            var cleanPath = decodeURIComponent(path);
+            var cleanPath = decodeURIComponent(path)
             ToDoListViewModelContext.loadFromFile(cleanPath)
+            loadfileDialog.fileUrl = ""
             loadfileDialog.close()
         }
         onRejected: {
+            loadfileDialog.fileUrl = ""
             loadfileDialog.close()
         }
     }
@@ -72,6 +80,47 @@ Rectangle {
                 badFileDialog.close()
             }
         }
+    }
+
+    AddFromTextDialog
+    {
+        id: addFromTextDialog
+        width: toDoList.width - 100
+        anchors.centerIn: parent
+
+        Row
+        {
+            spacing: 20
+            anchors.bottom: parent.bottom
+            Button
+            {
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#ececec"
+                }
+                text: "Ok"
+                onClicked: {
+                    ToDoListViewModelContext.addFromText(addFromTextDialog.getText())
+                    addFromTextDialog.clearText()
+                    addFromTextDialog.close()
+                }
+            }
+            Button
+            {
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#ececec"
+                }
+                text: "Cancel"
+                onClicked: {
+                    addFromTextDialog.clearText()
+                    addFromTextDialog.close()
+                }
+            }
+        }
+
     }
 
     Row
@@ -182,8 +231,22 @@ Rectangle {
             radius: 10
             color: "#ececec"
         }
-        id: sortButton
+        id: addFromTextButton
         x: addButton.x + addButton.width + 20
+        y: toDoList.y + toDoList.height + 20
+        text: "DODAJ Z TEKSTU"
+        onClicked: addFromTextDialog.open()
+    }
+
+    Button
+    {
+        background: Rectangle
+        {
+            radius: 10
+            color: "#ececec"
+        }
+        id: sortButton
+        x: addFromTextButton.x + addFromTextButton.width + 20
         y: toDoList.y + toDoList.height + 20
         text: "UPORZĄDKUJ"
         onClicked: ToDoListViewModelContext.sort()

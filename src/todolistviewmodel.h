@@ -15,6 +15,7 @@ public:
     explicit ToDoListViewModel(QObject * parent = nullptr);
 
     Q_INVOKABLE void addElement();
+    Q_INVOKABLE void addFromText(const QString& text);
     Q_INVOKABLE void updateTask(const QString& uuid, const QString& description, bool done, QColor color);
     Q_INVOKABLE void updateTaskColor(const QString& uuid, QColor color);
     Q_INVOKABLE void removeElement(const QString& uuid);
