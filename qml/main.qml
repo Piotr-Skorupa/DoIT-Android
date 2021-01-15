@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.3
 
 Rectangle {
 
-    color: "#fcfbe3"
+    color: "#aadbd7"
 
     FileDialog
     {
@@ -49,7 +49,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             anchors.bottom: parent.bottom
             text: "Ok"
@@ -72,7 +72,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             anchors.bottom: parent.bottom
             text: "Ok"
@@ -97,7 +97,7 @@ Rectangle {
                 background: Rectangle
                 {
                     radius: 10
-                    color: "#ececec"
+                    color: "#e1fffd"
                 }
                 text: "Ok"
                 onClicked: {
@@ -111,7 +111,7 @@ Rectangle {
                 background: Rectangle
                 {
                     radius: 10
-                    color: "#ececec"
+                    color: "#e1fffd"
                 }
                 text: "Cancel"
                 onClicked: {
@@ -132,7 +132,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             text: "ZAPISZ"
             onClicked:
@@ -146,7 +146,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             text: "WCZYTAJ"
             onClicked: loadfileDialog.open()
@@ -156,7 +156,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             text: "UDOSTĘPNIJ"
             onClicked: ToDoListViewModelContext.send("")
@@ -198,7 +198,7 @@ Rectangle {
             background: Rectangle
             {
                 radius: 10
-                color: "#ececec"
+                color: "#e1fffd"
             }
             text: "ZMIEŃ"
             onClicked: ToDoListViewModelContext.changeListName(listName.text)
@@ -216,7 +216,7 @@ Rectangle {
         background: Rectangle
         {
             radius: 10
-            color: "#ececec"
+            color: "#e1fffd"
         }
         id: addButton
         y: toDoList.y + toDoList.height + 20
@@ -229,7 +229,7 @@ Rectangle {
         background: Rectangle
         {
             radius: 10
-            color: "#ececec"
+            color: "#e1fffd"
         }
         id: addFromTextButton
         x: addButton.x + addButton.width + 20
@@ -243,7 +243,7 @@ Rectangle {
         background: Rectangle
         {
             radius: 10
-            color: "#ececec"
+            color: "#e1fffd"
         }
         id: sortButton
         x: addFromTextButton.x + addFromTextButton.width + 20

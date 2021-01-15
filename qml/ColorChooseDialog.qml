@@ -8,12 +8,12 @@ Dialog {
     property bool choosed: false
 
     background: Rectangle {
-        color: "#fcfbe3"
+        color: "#aadbd7"
     }
     contentItem: Rectangle {
         implicitHeight: 150
         width: parent.width - 100
-        color: "#fcfbe3"
+        color: "#aadbd7"
 
         Grid {
             Rectangle {

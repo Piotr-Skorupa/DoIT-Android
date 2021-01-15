@@ -4,14 +4,13 @@ import QtQuick.Layouts 1.12
 
 import ToDo 1.0
 
-
 Frame
 {
     id: frame
     width: parent.width
     background: Rectangle
     {
-        color: "#c1b4a2"
+        color: "#e1fffd"
     }
 
     property string globalClickedUuid: ""
@@ -31,7 +30,7 @@ Frame
                 background: Rectangle
                 {
                     radius: 10
-                    color: "#ececec"
+                    color: "#e1fffd"
                 }
                 text: "Ok"
                 onClicked: {
@@ -49,7 +48,7 @@ Frame
                 background: Rectangle
                 {
                     radius: 10
-                    color: "#ececec"
+                    color: "#e1fffd"
                 }
                 text: "Cancel"
                 onClicked: {
@@ -63,7 +62,7 @@ Frame
 
     ListView
     {
-        implicitHeight: 450
+        implicitHeight: 0.7 * parent.parent.parent.height //450
         width: parent.width
         spacing: 5
 
@@ -109,7 +108,7 @@ Frame
                 {
                     radius: 10
                     width: parent.width
-                    color: "#fcfbe3"
+                    color: "#aadbd7"
                 }
 
                 onEditingFinished: ToDoListViewModelContext.updateTask(uuid, text, doneCheck.checked, model.color)
@@ -132,7 +131,7 @@ Frame
                 onClicked: ToDoListViewModelContext.removeElement(uuid)
                 background: Rectangle
                 {
-                    color: "#ececec"
+                    color: "#e1fffd"
                     radius: 10
                 }
             }

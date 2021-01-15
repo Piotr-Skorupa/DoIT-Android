@@ -7,10 +7,10 @@ Dialog {
     property string information: "Dodaj elementy prosto z tekstu!\nPamietaj, żeby poszczególne elementy\nbyły oddzielone przecinkiem."
 
     background: Rectangle {
-        color: "#fcfbe3"
+        color: "#aadbd7"
     }
     contentItem: Rectangle {
-        color: "#fcfbe3"
+        color: "#aadbd7"
         implicitHeight: 200
         width: parent.width - 100
 
@@ -28,7 +28,7 @@ Dialog {
 
             background: Rectangle
             {
-                color: white
+                color: "#aadbd7"
                 width: infoText.width
                 height: infoText.height + 20
             }

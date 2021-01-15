@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("ScorpionDev");
     QCoreApplication::setOrganizationDomain("https://piotr-skorupa.github.io/projects/");
-//    QCoreApplication::setApplicationName("TODO_ANDROID");
+    QCoreApplication::setApplicationName("DoIT");
 
     QGuiApplication app(argc, argv);
 
