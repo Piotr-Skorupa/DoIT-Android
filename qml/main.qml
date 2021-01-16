@@ -1,12 +1,39 @@
 import QtQuick 2.15
-import QtQuick.Window 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.3
-
+import QtQuick.Layouts 1.12
+import QtQuick.Window 2.15
 
 Rectangle {
 
     color: "#aadbd7"
+
+    ToolBar {
+        id: toolBar
+        width: parent.width
+        height: titleLabel.height
+        background: Rectangle{
+            color: "lightskyblue"
+        }
+        Label {
+            id: titleLabel
+            text: "DoIT"
+            anchors.left: parent.left
+            font.bold: true
+            font.pixelSize: 24
+        }
+        Button{
+            height: titleLabel.height
+            anchors.right: parent.right
+            text: "?"
+            background: Rectangle
+            {
+                radius: 10
+                color: "#e1fffd"
+            }
+            onClicked: helpDialog.open()
+        }
+    }
 
     FileDialog
     {
@@ -82,6 +109,30 @@ Rectangle {
         }
     }
 
+    SimpleDialog
+    {
+        id: helpDialog
+        width: toDoList.width - 100
+        implicitHeight: parent.height - 100
+        anchors.centerIn: parent
+
+        information: "Tutaj będzie pomoc!"
+
+        Button
+        {
+            background: Rectangle
+            {
+                radius: 10
+                color: "#e1fffd"
+            }
+            anchors.bottom: parent.bottom
+            text: "Ok"
+            onClicked: {
+                helpDialog.close()
+            }
+        }
+    }
+
     AddFromTextDialog
     {
         id: addFromTextDialog
@@ -123,12 +174,16 @@ Rectangle {
 
     }
 
-    Row
+    RowLayout
     {
         id: menuButtons
-        spacing: 5
+        width: parent.width
+        spacing: 20
+        y: toolBar.height + 5
+
         Button
         {
+            Layout.fillWidth: true
             background: Rectangle
             {
                 radius: 10
@@ -143,6 +198,7 @@ Rectangle {
         }
         Button
         {
+            Layout.fillWidth: true
             background: Rectangle
             {
                 radius: 10
@@ -153,6 +209,7 @@ Rectangle {
         }
         Button
         {
+            Layout.fillWidth: true
             background: Rectangle
             {
                 radius: 10
@@ -167,7 +224,7 @@ Rectangle {
     {
         id: listNameRow
         x: 10
-        y: menuButtons.height + 10
+        y: menuButtons.y + menuButtons.height + 10
         spacing: 20
         TextInput
         {
@@ -211,45 +268,50 @@ Rectangle {
         y: listNameRow.y + listNameRow.height + 10
     }
 
-    Button
+    RowLayout
     {
-        background: Rectangle
+        id: bottomButtons
+        y: toDoList.y + toDoList.height + 10
+        width: parent.width
+        spacing: 20
+        Button
         {
-            radius: 10
-            color: "#e1fffd"
+            Layout.fillWidth: true
+            background: Rectangle
+            {
+                radius: 10
+                color: "#e1fffd"
+            }
+            id: addButton
+            text: "DODAJ"
+            onClicked: ToDoListViewModelContext.addElement()
         }
-        id: addButton
-        y: toDoList.y + toDoList.height + 20
-        text: "DODAJ"
-        onClicked: ToDoListViewModelContext.addElement()
-    }
 
-    Button
-    {
-        background: Rectangle
+        Button
         {
-            radius: 10
-            color: "#e1fffd"
+            Layout.fillWidth: true
+            background: Rectangle
+            {
+                radius: 10
+                color: "#e1fffd"
+            }
+            id: addFromTextButton
+            text: "DODAJ Z TEKSTU"
+            onClicked: addFromTextDialog.open()
         }
-        id: addFromTextButton
-        x: addButton.x + addButton.width + 20
-        y: toDoList.y + toDoList.height + 20
-        text: "DODAJ Z TEKSTU"
-        onClicked: addFromTextDialog.open()
-    }
 
-    Button
-    {
-        background: Rectangle
+        Button
         {
-            radius: 10
-            color: "#e1fffd"
+            Layout.fillWidth: true
+            background: Rectangle
+            {
+                radius: 10
+                color: "#e1fffd"
+            }
+            id: sortButton
+            text: "UPORZĄDKUJ"
+            onClicked: ToDoListViewModelContext.sort()
         }
-        id: sortButton
-        x: addFromTextButton.x + addFromTextButton.width + 20
-        y: toDoList.y + toDoList.height + 20
-        text: "UPORZĄDKUJ"
-        onClicked: ToDoListViewModelContext.sort()
     }
 }
 

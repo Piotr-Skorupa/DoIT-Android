@@ -29,7 +29,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "orange"
                         choosed = true
                     }
@@ -49,7 +49,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "red"
                         choosed = true
                     }
@@ -69,7 +69,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "yellow"
                         choosed = true
                     }
@@ -89,7 +89,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "green"
                         choosed = true
                     }
@@ -109,7 +109,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "lightskyblue"
                         choosed = true
                     }
@@ -129,7 +129,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "#0000ff"
                         choosed = true
                     }
@@ -149,7 +149,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "pink"
                         choosed = true
                     }
@@ -169,7 +169,7 @@ Dialog {
                     onClicked:
                     {
                         restoreColors()
-                        parent.color = "#ffffff"
+                        parent.border.width = 5
                         choosedColor = "#b2ff59"
                         choosed = true
                     }
@@ -180,13 +180,13 @@ Dialog {
 
     function restoreColors()
     {
-        orangeBox.color = orangeBox.baseColor
-        redBox.color = redBox.baseColor
-        yellowBox.color = yellowBox.baseColor
-        greenBox.color = greenBox.baseColor
-        lightBlueBox.color = lightBlueBox.baseColor
-        darkBlueBox.color = darkBlueBox.baseColor
-        pinkBox.color = pinkBox.baseColor
-        lightGreenBox.color = lightGreenBox.baseColor
+        orangeBox.border.width = 0
+        redBox.border.width = 0
+        yellowBox.border.width = 0
+        greenBox.border.width = 0
+        lightBlueBox.border.width = 0
+        darkBlueBox.border.width = 0
+        pinkBox.border.width = 0
+        lightGreenBox.border.width = 0
     }
 }
