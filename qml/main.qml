@@ -8,33 +8,6 @@ Rectangle {
 
     color: "#aadbd7"
 
-    ToolBar {
-        id: toolBar
-        width: parent.width
-        height: titleLabel.height
-        background: Rectangle{
-            color: "lightskyblue"
-        }
-        Label {
-            id: titleLabel
-            text: "DoIT"
-            anchors.left: parent.left
-            font.bold: true
-            font.pixelSize: 24
-        }
-        Button{
-            height: titleLabel.height
-            anchors.right: parent.right
-            text: "?"
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
-            }
-            onClicked: helpDialog.open()
-        }
-    }
-
     FileDialog
     {
         id: loadfileDialog
@@ -174,143 +147,173 @@ Rectangle {
 
     }
 
-    RowLayout
+    ColumnLayout
     {
-        id: menuButtons
+        id: mainColumnLayout
+        height: parent.height
         width: parent.width
-        spacing: 20
-        y: toolBar.height + 5
 
-        Button
-        {
+        ToolBar {
+            id: toolBar
             Layout.fillWidth: true
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
+            height: titleLabel.height
+            background: Rectangle{
+                color: "lightskyblue"
             }
-            text: "ZAPISZ"
-            onClicked:
-            {
-                ToDoListViewModelContext.saveToFile("")
-                saveOkDialog.open()
-            }
-        }
-        Button
-        {
-            Layout.fillWidth: true
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
-            }
-            text: "WCZYTAJ"
-            onClicked: loadfileDialog.open()
-        }
-        Button
-        {
-            Layout.fillWidth: true
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
-            }
-            text: "UDOSTĘPNIJ"
-            onClicked: ToDoListViewModelContext.send("")
-        }
-    }
 
-    Row
-    {
-        id: listNameRow
-        x: 10
-        y: menuButtons.y + menuButtons.height + 10
-        spacing: 20
-        TextInput
-        {
-            id: listName
-            font.pointSize: 30
-            text: ToDoListViewModelContext.currentList
-            width: contentWidth + 10
-
-            Connections
+            RowLayout
             {
-                target: ToDoListViewModelContext
-                function onCurrentListChange(newName)
-                {
-                    console.log("Catched change name signal")
-                    listName.text = newName
+                id: menuButtons
+                height: parent.height
+                width: parent.width
+
+                Label {
+                    id: titleLabel
+                    text: "DoIT"
+                    font.bold: true
+                    font.pixelSize: 24
                 }
 
-                function onLoadingFileError()
+                Button
                 {
-                    console.log("Catched loading file error signal")
-                    badFileDialog.open()
+                    Layout.fillWidth: true
+                    background: Rectangle
+                    {
+                        radius: 10
+                        color: "#e1fffd"
+                    }
+                    text: "ZAPISZ"
+                    onClicked:
+                    {
+                        ToDoListViewModelContext.saveToFile("")
+                        saveOkDialog.open()
+                    }
+                }
+                Button
+                {
+                    Layout.fillWidth: true
+                    background: Rectangle
+                    {
+                        radius: 10
+                        color: "#e1fffd"
+                    }
+                    text: "WCZYTAJ"
+                    onClicked: loadfileDialog.open()
+                }
+                Button
+                {
+                    Layout.fillWidth: true
+                    background: Rectangle
+                    {
+                        radius: 10
+                        color: "#e1fffd"
+                    }
+                    text: "UDOSTĘPNIJ"
+                    onClicked: ToDoListViewModelContext.send("")
+                }
+                Button{
+                    background: Rectangle
+                    {
+                        radius: 10
+                        color: "#e1fffd"
+                    }
+                    text: "?"
+                    onClicked: helpDialog.open()
                 }
             }
         }
 
-        Button
+        Row
         {
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
-            }
-            text: "ZMIEŃ"
-            onClicked: ToDoListViewModelContext.changeListName(listName.text)
-        }
-    }
-
-    ToDoList
-    {
-        id: toDoList
-        y: listNameRow.y + listNameRow.height + 10
-    }
-
-    RowLayout
-    {
-        id: bottomButtons
-        y: toDoList.y + toDoList.height + 10
-        width: parent.width
-        spacing: 20
-        Button
-        {
+            id: listNameRow
             Layout.fillWidth: true
-            background: Rectangle
+            spacing: 20
+            TextInput
             {
-                radius: 10
-                color: "#e1fffd"
-            }
-            id: addButton
-            text: "DODAJ"
-            onClicked: ToDoListViewModelContext.addElement()
-        }
+                id: listName
+                font.pointSize: 30
+                text: ToDoListViewModelContext.currentList
+                width: contentWidth + 10
 
-        Button
-        {
-            Layout.fillWidth: true
-            background: Rectangle
-            {
-                radius: 10
-                color: "#e1fffd"
+                Connections
+                {
+                    target: ToDoListViewModelContext
+                    function onCurrentListChange(newName)
+                    {
+                        console.log("Catched change name signal")
+                        listName.text = newName
+                    }
+
+                    function onLoadingFileError()
+                    {
+                        console.log("Catched loading file error signal")
+                        badFileDialog.open()
+                    }
+                }
             }
-            id: addFromTextButton
-            text: "DODAJ Z TEKSTU"
-            onClicked: addFromTextDialog.open()
+
+            Button
+            {
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#e1fffd"
+                }
+                text: "ZMIEŃ"
+                onClicked: ToDoListViewModelContext.changeListName(listName.text)
+            }
         }
 
-        Button
+        ToDoList
         {
+            id: toDoList
+            Layout.fillHeight: true
             Layout.fillWidth: true
-            background: Rectangle
+        }
+
+        RowLayout
+        {
+            id: bottomButtons
+            Layout.fillWidth: true
+            spacing: 20
+            Button
             {
-                radius: 10
-                color: "#e1fffd"
+                Layout.fillWidth: true
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#e1fffd"
+                }
+                id: addButton
+                text: "DODAJ"
+                onClicked: ToDoListViewModelContext.addElement()
             }
-            id: sortButton
-            text: "UPORZĄDKUJ"
-            onClicked: ToDoListViewModelContext.sort()
+
+            Button
+            {
+                Layout.fillWidth: true
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#e1fffd"
+                }
+                id: addFromTextButton
+                text: "DODAJ Z TEKSTU"
+                onClicked: addFromTextDialog.open()
+            }
+
+            Button
+            {
+                Layout.fillWidth: true
+                background: Rectangle
+                {
+                    radius: 10
+                    color: "#e1fffd"
+                }
+                id: sortButton
+                text: "UPORZĄDKUJ"
+                onClicked: ToDoListViewModelContext.sort()
+            }
         }
     }
 }

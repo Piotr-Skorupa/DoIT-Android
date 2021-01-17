@@ -7,6 +7,7 @@ import ToDo 1.0
 Frame
 {
     id: frame
+    height: parent.height
     width: parent.width
     background: Rectangle
     {
@@ -62,7 +63,7 @@ Frame
 
     ListView
     {
-        implicitHeight: 0.7 * parent.parent.parent.height //450
+        implicitHeight: parent.height
         width: parent.width
         spacing: 5
 
@@ -73,14 +74,13 @@ Frame
         delegate: RowLayout
         {
             property string uuid: model.uuid
+            width: parent.width
 
             Button
             {
                 id: colorButton
-                Layout.minimumWidth: 30
-                Layout.preferredWidth: 40
-                Layout.maximumWidth: 50
                 Layout.fillHeight: true
+                Layout.preferredWidth: parent.height
                 background: Rectangle
                 {
                     radius: width
@@ -97,8 +97,6 @@ Frame
             TextField
             {
                 id: editText
-                Layout.minimumWidth: frame.width - doneCheck.width - colorButton.width - removeButton.width - (4 * 20)
-                Layout.maximumWidth: frame.width - doneCheck.width - colorButton.width - removeButton.width - (4 * 20)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 selectByMouse: true
@@ -107,27 +105,24 @@ Frame
                 background: Rectangle
                 {
                     radius: 10
-                    width: parent.width
                     color: "#aadbd7"
                 }
 
                 onEditingFinished: ToDoListViewModelContext.updateTask(uuid, text, doneCheck.checked, model.color)
             }
+
             CheckBox
             {
                 id: doneCheck
-                Layout.fillHeight: true
                 checked: model.done
                 onCheckStateChanged: ToDoListViewModelContext.updateTask(uuid, editText.text, checked, model.color)
             }
+
             Button
             {
                 id: removeButton
                 text: "X"
                 Layout.fillHeight: true
-                Layout.minimumWidth: 30
-                Layout.preferredWidth: 40
-                Layout.maximumWidth: 50
                 onClicked: ToDoListViewModelContext.removeElement(uuid)
                 background: Rectangle
                 {

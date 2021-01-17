@@ -38,10 +38,10 @@ QVariant ToDoModel::data(const QModelIndex &index, int role) const
 
 void ToDoModel::add(const QString& description, bool done)
 {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    beginResetModel();
     Task task(description, done);
     items.append(task);
-    endInsertRows();
+    endResetModel();
 }
 
 void ToDoModel::updateTask(const QString& uuid, const QString& description, bool done, QColor color)

@@ -28,7 +28,7 @@ Dialog {
 
             background: Rectangle
             {
-                color: "#aadbd7"
+                color: "white"
                 width: infoText.width
                 height: infoText.height + 20
             }
